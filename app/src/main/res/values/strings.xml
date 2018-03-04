@@ -1,8 +1,22 @@
 <resources>
     <string name="app_name">Quiz</string>
-    <string name="false_button">FUCK YOU</string>
-    <string name="question_text">Вопрос?</string>
-    <string name="true_button">YAS</string>
+    <string name="false_button">Нет</string>
+    <string name="true_button">Да</string>
+    <string name="quit_button">Выход</string>
+
     <string name="true_ans">Правильно</string>
     <string name="false_ans">Неправильно</string>
+
+    <string name="question_text">Вопрос?</string>
+
+    <string name="question_1">Вопрос 1?</string>
+    <string name="question_2">Вопрос 2?</string>
+    <string name="question_3">Вопрос 3?</string>
+    <string name="question_4">Вопрос 4?</string>
+    <string name="question_5">Вопрос 5?</string>
+    <string name="question_6">Вопрос 6?</string>
+    <string name="question_7">Вопрос 7?</string>
+    <string name="question_8">Вопрос 8?</string>
+    <string name="question_9">Вопрос 9?</string>
+    <string name="question_10">Вопрос 10?</string>
 </resources>
