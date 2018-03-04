@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Quiz</string>
+    <string name="false_button">FUCK YOU</string>
+    <string name="question_text">Вопрос?</string>
+    <string name="true_button">YAS</string>
+    <string name="true_ans">Правильно</string>
+    <string name="false_ans">Неправильно</string>
+</resources>
