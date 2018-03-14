@@ -1,5 +1,6 @@
 package mex.quiz;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,12 +11,14 @@ import android.widget.Toast;
 import android.os.CountDownTimer;
 
 public class QuizActivity extends AppCompatActivity {
-    private Button trueButton, falseButton, quitButton;
+    private Button trueButton, falseButton, quitButton, cheatButton;
     private int counter = 0;
     private boolean locker = false;
     public static final String SAS = "QuizActivity";
     public static final String MARKER = "SAS";
     public static final String LOCKER_MARKER = "SOS";
+    public static final String EXTRA_ANS = "Kek";
+    public static int REQUEST_CHEAT = 0;
 
     @Override
     protected void onStart(){
@@ -69,7 +72,16 @@ public class QuizActivity extends AppCompatActivity {
         trueButton = findViewById(R.id.true_button);
         falseButton = findViewById(R.id.false_button);
         quitButton = findViewById(R.id.quit_button);
+        cheatButton = findViewById(R.id.cheat_button_invoke);
         changeText();
+
+        cheatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(CheatActivity.newIntent(QuizActivity.this, findAnswer()), REQUEST_CHEAT);
+                Toast.makeText(QuizActivity.this, R.string.false_ans, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         trueButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +89,8 @@ public class QuizActivity extends AppCompatActivity {
                 if(!locker)
                 {
                     locker = true;
-                    Toast.makeText(QuizActivity.this, R.string.true_ans, Toast.LENGTH_SHORT).show();
+                    int sas = findAnswer() ? R.string.true_ans : R.string.false_ans;
+                    Toast.makeText(QuizActivity.this, sas, Toast.LENGTH_SHORT).show();
                     new CountDownTimer(2000, 1000) {
                     public void onTick(long millisUntilFinished) {
                     }
@@ -96,7 +109,8 @@ public class QuizActivity extends AppCompatActivity {
                 if(!locker)
                 {
                     locker = true;
-                    Toast.makeText(QuizActivity.this, R.string.false_ans, Toast.LENGTH_SHORT).show();
+                    int sas = findAnswer() ? R.string.false_ans : R.string.true_ans;
+                    Toast.makeText(QuizActivity.this, sas, Toast.LENGTH_SHORT).show();
                     new CountDownTimer(2000, 1000) {
                         public void onTick(long millisUntilFinished) {
                         }
@@ -116,6 +130,18 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == REQUEST_CHEAT) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                boolean sas = data.getBooleanExtra("Lol", false);
+                Toast.makeText(QuizActivity.this, R.string.cheated, Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void changeText(){
@@ -134,5 +160,15 @@ public class QuizActivity extends AppCompatActivity {
         }
         else
             tv.setText(id);
+    }
+
+    private boolean findAnswer(){
+        String naming = "question_" + counter + "_ans";
+        int id = this.getResources().getIdentifier(naming, "string", getPackageName());
+        if(id != 0){
+            String sas = this.getResources().getString(id);
+            return sas.equals("Да");
+        }
+        return false;
     }
 }

@@ -7,7 +7,22 @@
     <string name="true_ans">Правильно</string>
     <string name="false_ans">Неправильно</string>
 
+    <string name="cheat_sure">Точно считерить?</string>
+    <string name="cheat_button">Считерить</string>
+    <string name="cheated">Считерено</string>
     <string name="question_text">Вопрос?</string>
+
+
+    <string name="question_1_ans">Да</string>
+    <string name="question_2_ans">Нет</string>
+    <string name="question_3_ans">Да</string>
+    <string name="question_4_ans">Нет</string>
+    <string name="question_5_ans">Да</string>
+    <string name="question_6_ans">Да</string>
+    <string name="question_7_ans">Нет</string>
+    <string name="question_8_ans">Нет</string>
+    <string name="question_9_ans">Да</string>
+    <string name="question_10_ans">Да</string>
 
     <string name="question_1">Вопрос 1?</string>
     <string name="question_2">Вопрос 2?</string>
