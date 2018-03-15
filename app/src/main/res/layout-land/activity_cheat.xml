@@ -19,17 +19,34 @@
             android:orientation="vertical"
             android:gravity="center|top"
             android:padding="25dp">
-            <TextView
-                android:id="@+id/question_cheat_question"
-                android:text="@string/cheat_sure"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="24dp" />
-            <TextView
-                android:id="@+id/question_cheat_answer"
-                android:layout_width="wrap_content"
+                android:gravity="center|top">
+                <TextView
+                    android:id="@+id/question_cheat_question"
+                    android:text="@string/cheat_sure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="24dp"/>
+                android:gravity="center|top">
+
+                <TextView
+                    android:id="@+id/question_cheat_answer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="10dp" />
+            </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout

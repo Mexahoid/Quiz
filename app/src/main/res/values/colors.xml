@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="question_not_answered">#FFFFFF</color>
+    <color name="question_answered_true_back">#11BB11</color>
+    <color name="question_answered_false_back">#AA1111</color>
+    <color name="question_cheated_back">#CC8844</color>
+    <color name="question_text_fore">#000000</color>
 </resources>
