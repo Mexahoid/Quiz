@@ -31,8 +31,8 @@ public class QuizActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState){
         outState.putInt(MARKER, counter);
-        outState.putInt(LOCKER_MARKER, locker ? 0 : 1);
-        outState.putInt(CHEATER_MARKER, cheated ? 0 : 1);
+        outState.putBoolean(LOCKER_MARKER, locker);
+        outState.putBoolean(CHEATER_MARKER, cheated);
         outState.putIntArray(COLORS_MARKER, answerColors);
         super.onSaveInstanceState(outState);
     }
@@ -48,10 +48,10 @@ public class QuizActivity extends AppCompatActivity {
                 savedInstanceState.containsKey(CHEATER_MARKER)&&
                 savedInstanceState.containsKey(COLORS_MARKER))
         {
-            counter = (int)savedInstanceState.get(MARKER) - 1;
-            locker = (int)savedInstanceState.get(LOCKER_MARKER) == 0;
-            cheated = (int)savedInstanceState.get(CHEATER_MARKER) == 0;
-            answerColors = (int[])savedInstanceState.get(COLORS_MARKER);
+            counter = savedInstanceState.getInt(MARKER) - 1;
+            locker = savedInstanceState.getBoolean(LOCKER_MARKER);
+            cheated = savedInstanceState.getBoolean(CHEATER_MARKER);
+            answerColors = savedInstanceState.getIntArray(COLORS_MARKER);
             colorRows();
         }
 
@@ -106,7 +106,7 @@ public class QuizActivity extends AppCompatActivity {
         String naming = "question_" + ++counter;
         int qid = this.getResources().getIdentifier(naming, "string", getPackageName());
         naming = "question_" + counter + "_text";
-        int qiid = this.getResources().getIdentifier(naming, "string", getPackageName());;
+        int qiid = this.getResources().getIdentifier(naming, "string", getPackageName());
         if(qid == 0 || qiid == 0)
         {
             question.setText("Вопросы кончились. Действие?");
