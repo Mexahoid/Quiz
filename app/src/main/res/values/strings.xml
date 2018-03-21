@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Кто хочет спать с миллионером</string>
+    <string name="app_name">Кто хочет стать миллионером</string>
 
     <string name="false_button">Нет</string>
     <string name="true_button">Да</string>
@@ -8,6 +8,9 @@
 
     <string name="true_ans">Правильно</string>
     <string name="false_ans">Неправильно</string>
+
+    <string name="question_next">Следующий</string>
+    <string name="question_prev">Предыдущий</string>
 
     <string name="cheat_sure">Точно считерить?</string>
     <string name="cheat_true">Правильный ответ:</string>

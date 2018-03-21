@@ -4,8 +4,6 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical">
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,21 +25,59 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="0.5"
-                    android:orientation="vertical"
                     android:gravity="center|top"
-                    android:padding="25dp">
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/question_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="24dp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="60"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/question_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="24dp"
+                            android:layout_gravity="center"/>
 
-                    <TextView
-                        android:id="@+id/question_choices"
-                        android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/question_choices"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="24dp"
+                            android:layout_gravity="center"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="24dp" />
+                        android:layout_gravity="bottom|center"
+                        android:orientation="horizontal"
+                        android:paddingTop="25dp">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="0.55"
+                            android:layout_height="wrap_content">
+                            <Button
+                                android:id="@+id/question_prev"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/question_prev"
+                                android:enabled="false"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="wrap_content"
+                            android:gravity="end">
+                            <Button
+                                android:id="@+id/question_next"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/question_next" />
+                        </LinearLayout>
+                    </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -327,6 +363,4 @@
         </RelativeLayout>
 
     </LinearLayout>
-
-
 </LinearLayout>

@@ -26,15 +26,57 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dip"
-                    android:layout_weight="0.3"
+                    android:layout_weight="0.4"
                     android:orientation="horizontal"
                     android:gravity="center|top"
                     android:padding="10dp">
-                    <TextView
-                        android:id="@+id/question_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:layout_width="0dip"
+                                android:layout_weight="60"
+                                android:layout_height="match_parent">
+                                <TextView
+                                    android:id="@+id/question_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/question_4"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dip"
+                                android:layout_weight="40"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="0.5">
+                                    <Button
+                                        android:id="@+id/question_prev"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/question_prev"
+                                        android:enabled="false"
+                                        />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="0.5">
+                                    <Button
+                                        android:id="@+id/question_next"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/question_next" />
+                                </LinearLayout>
+                            </LinearLayout>
+                    </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -66,7 +108,7 @@
                                 android:id="@+id/button_1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/question_button_1" />
+                                android:text="@string/question_button_1"/>
 
                             <Button
                                 android:id="@+id/button_3"
@@ -283,17 +325,6 @@
                                 android:padding="1dp"/>
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="1dp">
-                            <TextView
-                                android:id="@+id/row_12"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/question_12_label"
-                                android:padding="1dp"/>
-                        </LinearLayout>
                     </LinearLayout>
                     </RelativeLayout>
 
@@ -307,6 +338,17 @@
                         android:orientation="vertical"
                         android:gravity="end">
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="1dp">
+                            <TextView
+                                android:id="@+id/row_12"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/question_12_label"
+                                android:padding="1dp"/>
+                        </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

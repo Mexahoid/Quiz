@@ -12,7 +12,7 @@ import android.os.CountDownTimer;
 
 
 public class QuizActivity extends AppCompatActivity {
-    private Button quitButton, cheatButton, startOverButton;
+    private Button quitButton, cheatButton, startOverButton, nextButton, prevButton;
 
     private Button[] buttons = new Button[4];
     private int[] answerColors = new int[15];
@@ -60,34 +60,9 @@ public class QuizActivity extends AppCompatActivity {
         questionInfo = findViewById(R.id.question_choices);
 
         initButtons();
-        changeText();
+        changeText(true);
 
-        cheatButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivityForResult(CheatActivity.newIntent(QuizActivity.this, findAnswer()), REQUEST_CHEAT);
-            }
-        });
 
-        quitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               finish();
-            }
-        });
-
-        startOverButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                for(counter = 1; counter < 16; counter++)
-                    colorRow(0, counter);
-                counter = 0;
-                switchChoiceButtons();
-                startOverButton.setEnabled(false);
-                startOverButton.setVisibility(View.INVISIBLE);
-                changeText();
-            }
-        });
 
     }
     @Override
@@ -102,8 +77,27 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
-    private void changeText(){
-        String naming = "question_" + ++counter;
+    private void changeText(boolean forward){
+
+        switchChoiceButtons(true, counter == 16);
+        String naming;
+        if(forward){
+            naming = "question_" + ++counter;
+        }
+        else{
+            naming = "question_" + --counter;
+        }
+        if(counter < 16)
+            if(answerColors[counter - 1] == R.string.cheated ||
+                    answerColors[counter - 1] == R.string.true_ans ||
+                    answerColors[counter - 1] == R.string.false_ans){
+                switchChoiceButtons(false, false);
+            }
+
+        findViewById(R.id.question_prev).setEnabled(counter > 1);
+        findViewById(R.id.question_next).setEnabled(counter < 16);
+
+
         int qid = this.getResources().getIdentifier(naming, "string", getPackageName());
         naming = "question_" + counter + "_text";
         int qiid = this.getResources().getIdentifier(naming, "string", getPackageName());
@@ -111,11 +105,7 @@ public class QuizActivity extends AppCompatActivity {
         {
             question.setText("Вопросы кончились. Действие?");
             questionInfo.setText("");
-            switchChoiceButtons();
-            quitButton.setEnabled(true);
-            quitButton.setVisibility(View.VISIBLE);
-            startOverButton.setEnabled(true);
-            startOverButton.setVisibility(View.VISIBLE);
+            switchChoiceButtons(false, true);
         }
         else
         {
@@ -124,11 +114,20 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
-    private void switchChoiceButtons(){
+    private void switchChoiceButtons(boolean state, boolean ended){
         for (int i = 0; i < 4; i++)
         {
-            buttons[i].setEnabled(!buttons[i].isEnabled());
-            buttons[i].setVisibility(buttons[i].isEnabled() ? View.VISIBLE : View.INVISIBLE);
+            buttons[i].setEnabled(state);
+            buttons[i].setVisibility(state ? View.VISIBLE : View.INVISIBLE);
+        }
+        cheatButton.setEnabled(state);
+        cheatButton.setVisibility(state ? View.VISIBLE : View.INVISIBLE);
+        if(ended)
+        {
+            quitButton.setEnabled(!state);
+            quitButton.setVisibility(!state ? View.VISIBLE : View.INVISIBLE);
+            startOverButton.setEnabled(!state);
+            startOverButton.setVisibility(!state ? View.VISIBLE : View.INVISIBLE);
         }
     }
 
@@ -146,35 +145,99 @@ public class QuizActivity extends AppCompatActivity {
         buttons[0].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                choiceButtonHandler(getStringResourceValue("question_button_" + 1));
+                choiceButtonHandler(getStringResourceValue("question_button_" + 1), true);
             }
         });
 
         buttons[1].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                choiceButtonHandler(getStringResourceValue("question_button_" + 2));
+                choiceButtonHandler(getStringResourceValue("question_button_" + 2), true);
             }
         });
         buttons[2].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                choiceButtonHandler(getStringResourceValue("question_button_" + 3));
+                choiceButtonHandler(getStringResourceValue("question_button_" + 3), true);
             }
         });
         buttons[3].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                choiceButtonHandler(getStringResourceValue("question_button_" + 4));
+                choiceButtonHandler(getStringResourceValue("question_button_" + 4), true);
             }
         });
 
         startOverButton = findViewById(R.id.start_over_button);
         quitButton = findViewById(R.id.quit_button);
         cheatButton = findViewById(R.id.cheat_button_invoke);
+        nextButton = findViewById(R.id.question_next);
+        prevButton = findViewById(R.id.question_prev);
+
+
+        cheatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(CheatActivity.newIntent(QuizActivity.this, findAnswer()), REQUEST_CHEAT);
+            }
+        });
+
+        quitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        startOverButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for(counter = 1; counter < 16; counter++)
+                    colorRow(0, counter);
+                counter = 0;
+                switchChoiceButtons(true, true);
+                startOverButton.setEnabled(false);
+                startOverButton.setVisibility(View.INVISIBLE);
+                changeText(true);
+            }
+        });
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(cheated){
+                    choiceButtonHandler("", true);
+                }
+                else
+                    changeText(true);
+            }
+        });
+
+        question.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(counter < 16)
+                if(cheated){
+                    choiceButtonHandler("", true);
+                }
+                else
+                    changeText(true);
+            }
+        });
+
+        prevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(cheated){
+                    choiceButtonHandler("", false);
+                }
+                else
+                    changeText(false);
+            }
+        });
     }
 
-    private void choiceButtonHandler(String selection){
+    private void choiceButtonHandler(String selection, final boolean forward){
         final int resId = cheated
                 ? R.string.cheated
                 : (findAnswer().equals(selection)
@@ -189,7 +252,7 @@ public class QuizActivity extends AppCompatActivity {
                 }
                 public void onFinish() {
                     colorRow(resId, counter);
-                    changeText();
+                    changeText(forward);
                     locker = false;
                 }
             }.start();
